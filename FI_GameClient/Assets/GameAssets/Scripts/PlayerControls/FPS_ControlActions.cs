@@ -36,7 +36,7 @@ public class @FPS_ControlActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""dbe6d8ad-d261-4c79-9d2b-e56504f235aa"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

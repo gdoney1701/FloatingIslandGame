@@ -30,6 +30,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         controls = new FPS_ControlActions();
 
+        Cursor.visible = false;
         controls.Keyboard.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Keyboard.Movement.canceled += ctx => move = Vector2.zero;
     }
