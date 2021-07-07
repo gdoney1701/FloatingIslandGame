@@ -11,11 +11,12 @@ public class IslandGeneration : MonoBehaviour
     public GameObject islandParent;
     public int failureThreshold = 10;
     public int platformMaxSize = 1;
+    public List<Vector3> pointStart = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
     {
-        List<Vector3> pointStart = new List<Vector3>();
+        //List<Vector3> pointStart = new List<Vector3>();
         float minRad = radius - shellThickness;
         int i = 0;
         int failCounter = 0;
@@ -29,27 +30,33 @@ public class IslandGeneration : MonoBehaviour
                 Mathf.Pow(newCoords.x, 2) + Mathf.Pow(newCoords.y, 2) + Mathf.Pow(newCoords.z, 2));
             if (vectorCheck >= minRad && vectorCheck <= radius)
             {
-                Collider[] areaCheck = Physics.OverlapSphere(newCoords, platformMaxSize);
-                if (areaCheck.Length > 0)
+                Collider[] nearPlatforms = Physics.OverlapSphere(newCoords, platformMaxSize);
+                if (nearPlatforms.Length > 0)
                 {
                     failCounter++;
-                    if (failCounter > 0)
+                    if (failCounter > failureThreshold)
                     {
                         failCounter = 0;
                         i++;
                     }
                     continue;
                 }
+                int layerMask = 1 << 10;
+                RaycastHit centerInfo;
+                if (Physics.Linecast(newCoords, Vector3.zero, out centerInfo, layerMask))
+                {
+                    Debug.Log("Successful Hit on " + centerInfo.collider.gameObject.name);
+                }
+
+                GameObject newIsland = Instantiate(islandPrefab, newCoords, new Quaternion(0, 0, 0, 0));
+                newIsland.transform.SetParent(islandParent.transform);
+                newIsland.transform.rotation = Quaternion.FromToRotation(transform.up, centerInfo.normal);
+
                 pointStart.Add(newCoords);
                 i++;
                 failCounter = 0;
                 continue;
             }
-        }
-        foreach(Vector3 entry in pointStart)
-        {
-            GameObject newIsland = Instantiate(islandPrefab, entry, new Quaternion(0,0,0,0));
-            newIsland.transform.SetParent(islandParent.transform);
         }
         islandParent.name += pointStart.Count.ToString();
     }
