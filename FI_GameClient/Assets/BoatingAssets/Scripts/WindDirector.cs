@@ -8,6 +8,8 @@ public class WindDirector : MonoBehaviour
     private bool windVectorsPresent = false;
     private GameObject xAxisArrow;
     private GameObject yAxisArrow;
+    public float windPower;
+    public float angle;
 
     //Arrow for Testing Purposes
     public GameObject directionArrow;
@@ -28,21 +30,22 @@ public class WindDirector : MonoBehaviour
             windVectorsPresent = false;
         }
         globalWindDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        windPower = Random.Range(0, 20f);
 
         //Have to offset by 90 degrees -> radians to recontextualize into y/x space
-        float angle = Mathf.Atan2(globalWindDirection.y, globalWindDirection.x); //Creates an angle based on the normalized global wind
+        angle = Mathf.Atan2(globalWindDirection.y, globalWindDirection.x); //Creates an angle based on the normalized global wind
         angle *= Mathf.Rad2Deg;
-        Debug.Log(angle);
-        //These 4 lines exist only for testing purposes, can be removed later on
-        xAxisArrow = Instantiate(directionArrow, directionArrow.transform.position, new Quaternion(0, 0, 0, 0));
-        yAxisArrow = Instantiate(directionArrow, directionArrow.transform.position, new Quaternion(0, 0, 0, 0));
 
-        GenerateVectorComponents(Color.red, xAxisArrow, true);
-        GenerateVectorComponents(Color.green, yAxisArrow, false);
+        //These 4 lines exist only for testing purposes, can be removed later on
+        //xAxisArrow = Instantiate(directionArrow, directionArrow.transform.position, new Quaternion(0, 0, 0, 0));
+        //yAxisArrow = Instantiate(directionArrow, directionArrow.transform.position, new Quaternion(0, 0, 0, 0));
+
+        //GenerateVectorComponents(Color.red, xAxisArrow, true);
+        //GenerateVectorComponents(Color.green, yAxisArrow, false);
 
         directionArrow.transform.rotation = Quaternion.Euler(0, angle, 0);
         //directionArrow.transform.Rotate(new Vector3(0, angle, 0));
-        windVectorsPresent = true;
+        //windVectorsPresent = true;
     }
 
     public void GenerateVectorComponents(Color vectorColor, GameObject axis, bool xAxis)
