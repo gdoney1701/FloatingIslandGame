@@ -29,10 +29,9 @@ public class WindDirector : MonoBehaviour
             yAxisArrow = null;
             windVectorsPresent = false;
         }
-        globalWindDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        globalWindDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         windPower = Random.Range(0, 20f);
 
-        //Have to offset by 90 degrees -> radians to recontextualize into y/x space
         angle = Mathf.Atan2(globalWindDirection.y, globalWindDirection.x); //Creates an angle based on the normalized global wind
         angle *= Mathf.Rad2Deg;
 
@@ -44,7 +43,6 @@ public class WindDirector : MonoBehaviour
         //GenerateVectorComponents(Color.green, yAxisArrow, false);
 
         directionArrow.transform.rotation = Quaternion.Euler(0, angle, 0);
-        //directionArrow.transform.Rotate(new Vector3(0, angle, 0));
         //windVectorsPresent = true;
     }
 
