@@ -14,15 +14,26 @@ public class BoomDirectionHandler : MonoBehaviour
     public float maxAngle = 90;
     float timeSinceRelease;
     float tensionLimit;
+    Vector2 sailVector;
 
     private void Start()
     {
         UpdateWindData();
         releaseAngle = transform.eulerAngles.y;
+        sailVector = new Vector2(0, 1); 
     }
 
     private void Update()
     {
+        Vector2 sailVector = new Vector2(Mathf.Cos(transform.eulerAngles.y*Mathf.Deg2Rad), Mathf.Sin(transform.eulerAngles.y*Mathf.Deg2Rad)).normalized;
+        if (transform.eulerAngles.y > 180)
+        {
+            Debug.DrawRay(transform.position, new Vector3(sailVector.x, 0, sailVector.y), Color.red);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, new Vector3(-sailVector.x, 0, sailVector.y), Color.green);
+        }
         if (!currentTension && !atMaxRotation)
         {
             float rotationDuration = 15 / (currentWindSpeed * alignmentModifier) + 1;
