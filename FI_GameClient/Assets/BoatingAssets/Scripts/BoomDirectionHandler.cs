@@ -37,14 +37,16 @@ public class BoomDirectionHandler : MonoBehaviour
         }
         if (!currentTension && !atMaxRotation)
         {
-            Debug.Log("Rotating");
             float rotationDuration = 15 / (currentWindSpeed * alignmentModifier) + 1;
             float t = (Time.time - timeSinceRelease) / rotationDuration;
-            transform.rotation = Quaternion.Euler(0, Mathf.SmoothStep(releaseAngle, currentWindAngle, t), 0);
+            float newAngle = Mathf.SmoothStep(releaseAngle, currentWindAngle, t);
+            if (maxAngle < newAngle && newAngle < 360-maxAngle)
+            {
+                transform.rotation = Quaternion.Euler(0, newAngle, 0);
+            }
             if (transform.eulerAngles.y > 360-maxAngle || transform.eulerAngles.y < maxAngle)
             {
                 atMaxRotation = true;
-                Debug.Log("Halting Rotation");
             }
         }
         if (currentTension)

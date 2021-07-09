@@ -13,10 +13,16 @@ public class Boat_Controller : MonoBehaviour
     public float rudderDirection;
     public float sailTension;
     bool holdingTension = false;
+    float camSide = -1;
+
+    public GameObject portSideCam;
+    public GameObject starboardSideCam;
 
 
     private void Awake()
     {
+        portSideCam.SetActive(true);
+        camSide = -1;
         controls = new Boat_InputActions();
 
         controls.Boat_Keyboard.Rudder.performed += ctx => rudderDirection = ctx.ReadValue<float>();
@@ -30,6 +36,8 @@ public class Boat_Controller : MonoBehaviour
         controls.Boat_Keyboard.SailTension.canceled += ctx => sailTension = 0;
 
         controls.Boat_Keyboard.GenerateGlobalWind.performed += ctx => WindChange();
+
+        controls.Boat_Keyboard.SwitchSides.performed += ctx => ChangeSide(ctx.ReadValue<float>());
     }
 
     private void OnEnable()
@@ -55,5 +63,22 @@ public class Boat_Controller : MonoBehaviour
             Debug.Log("TENSION");
         }
         sailTension = inputTension;
+    }
+    void ChangeSide(float inputDirection)
+    {
+        Debug.Log("Attempting Switching Sides");
+        if (camSide > 0 && inputDirection < 0)
+        {
+            //Changing from right to left
+            portSideCam.SetActive(true);
+            starboardSideCam.SetActive(false);
+        }
+        if (camSide < 0 && inputDirection > 0)
+        {
+            //Changing from left to right
+            starboardSideCam.SetActive(true);
+            portSideCam.SetActive(false);
+        }
+        camSide = inputDirection;
     }
 }
