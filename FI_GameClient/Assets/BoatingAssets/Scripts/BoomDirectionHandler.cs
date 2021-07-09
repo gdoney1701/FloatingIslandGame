@@ -15,6 +15,7 @@ public class BoomDirectionHandler : MonoBehaviour
     float timeSinceRelease;
     float tensionLimit;
     Vector2 sailVector;
+    bool clockwise;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class BoomDirectionHandler : MonoBehaviour
         Vector2 sailVector = new Vector2(Mathf.Cos(transform.eulerAngles.y*Mathf.Deg2Rad), Mathf.Sin(transform.eulerAngles.y*Mathf.Deg2Rad)).normalized;
         if (transform.eulerAngles.y > 180)
         {
-            Debug.DrawRay(transform.position, new Vector3(sailVector.x, 0, sailVector.y), Color.red);
+            Debug.DrawRay(transform.position, new Vector3(-sailVector.x, 0, sailVector.y), Color.red);
         }
         else
         {
@@ -36,14 +37,14 @@ public class BoomDirectionHandler : MonoBehaviour
         }
         if (!currentTension && !atMaxRotation)
         {
+            Debug.Log("Rotating");
             float rotationDuration = 15 / (currentWindSpeed * alignmentModifier) + 1;
             float t = (Time.time - timeSinceRelease) / rotationDuration;
-            float directionalMaxAngle = windDirection * maxAngle;
-            transform.rotation = Quaternion.Euler(0, Mathf.SmoothStep(releaseAngle, maxAngle, t), 0);
-            //transform.Rotate(new Vector3(0, Mathf.SmoothStep(releaseAngle, maxAngle, t), 0));
-            if (Mathf.Approximately(transform.eulerAngles.y, directionalMaxAngle))
+            transform.rotation = Quaternion.Euler(0, Mathf.SmoothStep(releaseAngle, currentWindAngle, t), 0);
+            if (transform.eulerAngles.y > 360-maxAngle || transform.eulerAngles.y < maxAngle)
             {
                 atMaxRotation = true;
+                Debug.Log("Halting Rotation");
             }
         }
         if (currentTension)
@@ -58,6 +59,12 @@ public class BoomDirectionHandler : MonoBehaviour
         WindDirector tempWind = GameObject.FindGameObjectWithTag("WindDirector").GetComponent<WindDirector>();
         currentWindAngle = tempWind.angle;
         currentWindSpeed = tempWind.windPower;
+        if (!currentTension)
+        {
+            ResetRelease();
+        }
+        atMaxRotation = false;
+
     }
     public void ResetRelease()
     {

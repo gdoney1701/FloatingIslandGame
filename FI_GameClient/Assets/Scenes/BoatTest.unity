@@ -387,8 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d6fc5c0e375d84d93352d159387500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boomDirection: {fileID: 0}
-  boatDirection: {fileID: 0}
+  boomDirection: {fileID: 1976282951}
+  boatDirection: {fileID: 272750100}
   windDirector: {fileID: 1018826429}
   rudderDirection: 0
   sailTension: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7783709, y: 1}
+    m_SensorSize: {x: 1.7762865, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -1373,7 +1373,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7783709, y: 1}
+    m_SensorSize: {x: 1.7762865, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -1615,6 +1615,36 @@ Transform:
   m_Father: {fileID: 1484664958}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1569225933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569225934}
+  m_Layer: 0
+  m_Name: SailEmpty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1569225934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569225933}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1976282950}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1698117062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,7 +1984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 2, z: -2.9099998}
+  m_LocalPosition: {x: 2, y: 2, z: -2.9099998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2167,6 +2197,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 869686646}
+  - {fileID: 1569225934}
   m_Father: {fileID: 272750098}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

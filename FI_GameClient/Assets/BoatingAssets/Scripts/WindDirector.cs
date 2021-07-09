@@ -34,6 +34,10 @@ public class WindDirector : MonoBehaviour
 
         angle = Mathf.Atan2(globalWindDirection.y, globalWindDirection.x); //Creates an angle based on the normalized global wind
         angle *= Mathf.Rad2Deg;
+        if (angle < 0)
+        {
+            angle = 360 + angle;
+        }
 
         //These 4 lines exist only for testing purposes, can be removed later on
         //xAxisArrow = Instantiate(directionArrow, directionArrow.transform.position, new Quaternion(0, 0, 0, 0));
