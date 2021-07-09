@@ -13,6 +13,7 @@ public class BoomDirectionHandler : MonoBehaviour
     float releaseAngle;
     public float maxAngle = 90;
     float timeSinceRelease;
+    float tensionLimit;
 
     private void Start()
     {
@@ -34,6 +35,10 @@ public class BoomDirectionHandler : MonoBehaviour
                 atMaxRotation = true;
             }
         }
+        if (currentTension)
+        {
+
+        }
 
         
     }
@@ -47,5 +52,10 @@ public class BoomDirectionHandler : MonoBehaviour
     {
         timeSinceRelease = Time.time;
         releaseAngle = transform.eulerAngles.y;
+    }
+    public void StartTension()
+    {
+        currentTension = true;
+
     }
 }

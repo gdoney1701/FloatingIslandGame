@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "StartTension",
+                    "type": "Button",
+                    "id": "650bafae-e0c1-43ef-9cfd-33e148c36459",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -81,37 +89,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "SW_Tension",
-                    "id": "4b02ea7f-0f84-4d64-b8ec-b8000e6fc15a",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "1d9b2ac6-9437-4b23-9164-322f2b5f39f8",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SailTension",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "691cb2b5-857b-4114-9320-5d14437f468f",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SailTension",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "4b429817-6884-4cb0-806e-aab469167bc5",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SailTension",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "QE_Sides",
@@ -165,6 +151,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "GenerateGlobalWind",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96499fd7-ec45-437f-be3d-2c3583db7359",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartTension",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

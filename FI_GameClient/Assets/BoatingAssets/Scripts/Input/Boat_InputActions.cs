@@ -57,6 +57,14 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""StartTension"",
+                    ""type"": ""Button"",
+                    ""id"": ""650bafae-e0c1-43ef-9cfd-33e148c36459"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -94,37 +102,15 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""SW_Tension"",
-                    ""id"": ""4b02ea7f-0f84-4d64-b8ec-b8000e6fc15a"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""1d9b2ac6-9437-4b23-9164-322f2b5f39f8"",
+                    ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SailTension"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""691cb2b5-857b-4114-9320-5d14437f468f"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SailTension"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""4b429817-6884-4cb0-806e-aab469167bc5"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SailTension"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""QE_Sides"",
@@ -180,6 +166,17 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
                     ""action"": ""GenerateGlobalWind"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96499fd7-ec45-437f-be3d-2c3583db7359"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartTension"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -193,6 +190,7 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
         m_Boat_Keyboard_SwitchSides = m_Boat_Keyboard.FindAction("SwitchSides", throwIfNotFound: true);
         m_Boat_Keyboard_Look = m_Boat_Keyboard.FindAction("Look", throwIfNotFound: true);
         m_Boat_Keyboard_GenerateGlobalWind = m_Boat_Keyboard.FindAction("GenerateGlobalWind", throwIfNotFound: true);
+        m_Boat_Keyboard_StartTension = m_Boat_Keyboard.FindAction("StartTension", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -247,6 +245,7 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Boat_Keyboard_SwitchSides;
     private readonly InputAction m_Boat_Keyboard_Look;
     private readonly InputAction m_Boat_Keyboard_GenerateGlobalWind;
+    private readonly InputAction m_Boat_Keyboard_StartTension;
     public struct Boat_KeyboardActions
     {
         private @Boat_InputActions m_Wrapper;
@@ -256,6 +255,7 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
         public InputAction @SwitchSides => m_Wrapper.m_Boat_Keyboard_SwitchSides;
         public InputAction @Look => m_Wrapper.m_Boat_Keyboard_Look;
         public InputAction @GenerateGlobalWind => m_Wrapper.m_Boat_Keyboard_GenerateGlobalWind;
+        public InputAction @StartTension => m_Wrapper.m_Boat_Keyboard_StartTension;
         public InputActionMap Get() { return m_Wrapper.m_Boat_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -280,6 +280,9 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
                 @GenerateGlobalWind.started -= m_Wrapper.m_Boat_KeyboardActionsCallbackInterface.OnGenerateGlobalWind;
                 @GenerateGlobalWind.performed -= m_Wrapper.m_Boat_KeyboardActionsCallbackInterface.OnGenerateGlobalWind;
                 @GenerateGlobalWind.canceled -= m_Wrapper.m_Boat_KeyboardActionsCallbackInterface.OnGenerateGlobalWind;
+                @StartTension.started -= m_Wrapper.m_Boat_KeyboardActionsCallbackInterface.OnStartTension;
+                @StartTension.performed -= m_Wrapper.m_Boat_KeyboardActionsCallbackInterface.OnStartTension;
+                @StartTension.canceled -= m_Wrapper.m_Boat_KeyboardActionsCallbackInterface.OnStartTension;
             }
             m_Wrapper.m_Boat_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -299,6 +302,9 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
                 @GenerateGlobalWind.started += instance.OnGenerateGlobalWind;
                 @GenerateGlobalWind.performed += instance.OnGenerateGlobalWind;
                 @GenerateGlobalWind.canceled += instance.OnGenerateGlobalWind;
+                @StartTension.started += instance.OnStartTension;
+                @StartTension.performed += instance.OnStartTension;
+                @StartTension.canceled += instance.OnStartTension;
             }
         }
     }
@@ -310,5 +316,6 @@ public class @Boat_InputActions : IInputActionCollection, IDisposable
         void OnSwitchSides(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnGenerateGlobalWind(InputAction.CallbackContext context);
+        void OnStartTension(InputAction.CallbackContext context);
     }
 }

@@ -28,7 +28,7 @@ public class BoatDirectionHandler : MonoBehaviour
         boomAngle = boomObject.transform.eulerAngles.y;
         float globalWindAngle = windSampling.angle;
 
-        Debug.Log("Wind is " + globalWindAngle.ToString() + ", Ship is " + boomAngle.ToString());
+        //Debug.Log("Wind is " + globalWindAngle.ToString() + ", Ship is " + boomAngle.ToString());
 
         alignmentModifier = CheckHeadingAgainstWind(globalWindAngle);
         if( heading - globalWindAngle > 0)
